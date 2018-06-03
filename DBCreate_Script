@@ -1,0 +1,18 @@
+(require '[clojure.java.jdbc :as jdbc])
+(jdbc/with-db-connection [conn {:dbtype "h2" :dbname "./simpleweb"}]
+
+  (jdbc/db-do-commands conn
+    (jdbc/create-table-ddl :locations
+      [[:id "bigint primary key auto_increment"]
+       [:x "integer"]
+       [:y "integer"]]))
+
+  (jdbc/insert! conn :locations
+    {:x 8 :y 9}))
+
+
+;Test code
+(require 'simpleweb.db)
+(ns simpleweb.db)
+(jdbc/query db-spec
+  "select x, y from locations where id = 1")
