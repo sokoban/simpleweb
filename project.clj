@@ -6,6 +6,7 @@
                  [compojure "1.5.1"]
                  [hiccup "1.0.5"]
                  [org.clojure/java.jdbc "0.6.0"]
+                 [conman "0.7.5"]
                  [com.h2database/h2 "1.4.193"]
                  [ring/ring-defaults "0.2.1"]]
   :plugins [[lein-ring "0.9.7"]]
