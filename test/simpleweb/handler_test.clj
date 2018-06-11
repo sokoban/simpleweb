@@ -1,14 +1,15 @@
 (ns simpleweb.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [simpleweb.handler :refer :all]))
+            [simpleweb.handler :refer :all]
+            [clj-http.client :as client]))
+
+(defn getwhois
+  [ipaddr]
+  (let [body (client/get "http://www.naver.com")]
+    (.println (System/out) body)))
 
 (deftest test-app
-  (testing "main route"
-    (let [response (app (mock/request :get "/"))]
-      (is (= (:status response) 200))
-      (is (= (:body response) "Hello World"))))
-
-  (testing "not-found route"
-    (let [response (app (mock/request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+  (.println (System/out) "Hello")
+  (getwhois "1.1.1.1")
+  (.println (System/out) "Good Bye"))

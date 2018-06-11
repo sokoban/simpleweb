@@ -17,6 +17,8 @@
    " | "
    [:a {:href "/add-location"} "Add a Location"]
    " | "
+   [:a {:href "/whois"} "whois"]
+   " | "
    [:a {:href "/all-locations"} "View All Locations"]
    " ]"])
 
@@ -27,6 +29,19 @@
    header-links
    [:h1 "Home"]
    [:p "Webapp to store and display some 2D (x,y) locations."]))
+
+(defn whois
+  [{:keys [x y]}]
+  (page/html5
+    (gen-page-head "whois")
+    header-links
+    [:h1 "whois"]
+    [:form {:action "/searchwhois" :method "POST"}]
+    [:p "ip address value: " [:textarea { :name "ipaddr" :rows "10" :cols "20"}]]
+    [:p [:input {:type "submit" :value "submit search"}]]))
+
+(defn search-whois
+  [{:keys [ipaddr]}])
 
 (defn add-location-page
   []

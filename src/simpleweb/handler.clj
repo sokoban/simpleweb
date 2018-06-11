@@ -14,6 +14,9 @@
   (POST "/add-location"
         {params :params}
         (views/add-location-results-page params))
+  (GET "/whois"
+        {params :params}
+        (views/whois params))
   (GET "/location/:loc-id"
        [loc-id]
        (views/location-page loc-id))
