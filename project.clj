@@ -9,7 +9,8 @@
                  [conman "0.7.5"]
                  [com.h2database/h2 "1.4.193"]
                  [ring/ring-defaults "0.2.1"]
-                 [clj-http "3.9.0"]]
+                 [clj-http "3.9.0"]
+                 [cheshire "5.8.0"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler simpleweb.handler/app}
   :profiles
