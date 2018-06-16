@@ -1,10 +1,9 @@
 (ns simpleweb.outwhois
-  (:require [compojure.core :refer [defroutes GET POST]]
-            [hiccup.core :refer [html]]
-            [compojure.coercions :refer [as-int]]
-            [clj-http.client :as client]
+  (:require [clj-http.client :as client]
             [cheshire.core :refer :all]))
 
-(def getwhois[ipaddress]
-  (.println (System/out) (client/post "http://www.naver.com"))
-  (let [body (client/get "http://www.naver.com")]))
+(defn getwhois
+  [ipaddr]
+  (let [api-addr (str "http://ip-api.com/json/" ipaddr)]
+    (let [respon (:body (client/get api-addr {:as :json-kebab-keys}))]
+      (let [ret (str (:countryCode (parse-string respon true)) "|" (:org (parse-string respon true))) ] ret))))

@@ -15,8 +15,11 @@
         {params :params}
         (views/add-location-results-page params))
   (GET "/whois"
+        []
+        (views/whois))
+  (POST "/search-whois"
         {params :params}
-        (views/whois params))
+        (views/search-whois-page params))
   (GET "/location/:loc-id"
        [loc-id]
        (views/location-page loc-id))

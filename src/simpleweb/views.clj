@@ -2,7 +2,8 @@
   (:require [simpleweb.db :as db]
             [clojure.string :as str]
             [hiccup.page :as page]
-            [ring.util.anti-forgery :as util]))
+            [ring.util.anti-forgery :as util]
+            [simpleweb.outwhois :as owhois]))
 
 (defn gen-page-head
   [title]
@@ -31,17 +32,25 @@
    [:p "Webapp to store and display some 2D (x,y) locations."]))
 
 (defn whois
-  [{:keys [x y]}]
+  []
   (page/html5
     (gen-page-head "whois")
     header-links
     [:h1 "whois"]
-    [:form {:action "/searchwhois" :method "POST"}]
-    [:p "ip address value: " [:textarea { :name "ipaddr" :rows "10" :cols "20"}]]
-    [:p [:input {:type "submit" :value "submit search"}]]))
+    [:form {:action "/search-whois" :method "POST"}
+      (util/anti-forgery-field) ; prevents cross-site scripting attacks
+      [:p "ip address value: " [:textarea { :name "ipaddr" :rows "10" :cols "20"}]]
+;      [:p "ip address value: " [:input {:type "text" :name "ipaddr"}]]
+      [:p [:input {:type "submit" :value "submit search"}]]]))
 
-(defn search-whois
-  [{:keys [ipaddr]}])
+(defn search-whois-page
+  [{:keys [ipaddr]}]
+  (let [ret (owhois/getwhois ipaddr)]
+    (page/html5
+       (gen-page-head "whois")
+       header-links
+       [:h1 "whois results"]
+       [:p "IP ADDRESS [" ipaddr "] (Data : "  ret " "])))
 
 (defn add-location-page
   []

@@ -8,11 +8,11 @@
 (defn getwhois
   [ipaddr]
   (let [api-addr (str "http://ip-api.com/json/" ipaddr)]
-    (let [respon (client/get api-addr {:as :json})]
-      (.println (System/out) respon))))
-;      (parse-string body true))))
+    (let [respon (:body (client/get api-addr {:as :json-kebab-keys}))]
+      (let [ret (str (:countryCode (parse-string respon true)) "|" (:org (parse-string respon true)))] ret))))
+
 
 (deftest test-app
   (.println (System/out) "Hello")
-  (getwhois "221.143.42.85")
+  (println (getwhois "221.143.42.85"))
   (.println (System/out) "Good Bye"))
