@@ -7,3 +7,6 @@ INSERT INTO locations ( x, y ) VALUES ( ?, ? ) -- (?1, ?2) [22018-193]
 2018-06-09 16:07:04 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Data conversion error converting "'342 ;select 1' (LOCATIONS: X INTEGER)"; SQL statement:
 INSERT INTO locations ( x, y ) VALUES ( ?, ? ) -- (?1, ?2) [22018-193]
+2018-06-17 01:03:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'''' (LOCATIONS: X INTEGER)"; SQL statement:
+INSERT INTO locations ( x, y ) VALUES ( ?, ? ) -- (?1, ?2) [22018-193]

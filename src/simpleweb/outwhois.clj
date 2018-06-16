@@ -1,9 +1,15 @@
 (ns simpleweb.outwhois
   (:require [clj-http.client :as client]
+            [clojure.string :as str]
             [cheshire.core :refer :all]))
+
 
 (defn getwhois
   [ipaddr]
-  (let [api-addr (str "http://ip-api.com/json/" ipaddr)]
-    (let [respon (:body (client/get api-addr {:as :json-kebab-keys}))]
-      (let [ret (str (:countryCode (parse-string respon true)) "|" (:org (parse-string respon true))) ] ret))))
+  (let [iparray (clojure.string/split-lines ipaddr)]
+    (for [ip iparray]
+      (if (not (empty? ip))
+        (let [api-addr (str "http://ip-api.com/json/" ip)]
+          (let [respon (:body (client/get api-addr {:as :json-kebab-keys}))]
+            (let [mapcode (parse-string respon true)]
+              (let [ret (str ip " | "(get mapcode :countryCode) " | " (get mapcode :org) "\n")] ret))))))))
