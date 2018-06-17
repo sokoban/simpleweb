@@ -4,7 +4,18 @@ This source code is clojure doccument sample
 
 and attach some function
 
+1) Whois search (
+
+
 http://clojure-doc.org/articles/tutorials/basic_web_development.html
+
+refer site
+https://clojuredocs.org/clojure.core/
+https://github.com/dakrone/cheshire
+http://clojure-doc.org/articles/language/functions.htm
+
+IP Location API
+http://ip-api.com/docs/api:jsonl
 
 ## Prerequisites
 
