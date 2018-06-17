@@ -2,6 +2,8 @@
 
 This source code is clojure doccument sample
 
+and attach some function
+
 http://clojure-doc.org/articles/tutorials/basic_web_development.html
 
 ## Prerequisites
