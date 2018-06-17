@@ -10,10 +10,10 @@ and attach some function
 http://clojure-doc.org/articles/tutorials/basic_web_development.html
 
 refer site
- https://clojuredocs.org/clojure.core/
- https://github.com/dakrone/cheshire
- http://clojure-doc.org/articles/language/functions.htm
- https://github.com/dakrone/clj-http#optional-dependencies
+- https://clojuredocs.org/clojure.core/
+- https://github.com/dakrone/cheshire
+- http://clojure-doc.org/articles/language/functions.htm
+- https://github.com/dakrone/clj-http#optional-dependencies
 
 IP Location API
 http://ip-api.com/docs/api:jsonl
