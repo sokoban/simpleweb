@@ -4,7 +4,7 @@ This source code is clojure doccument sample
 
 and attach some function
 
-1) Whois search (
+1) Whois search
 
 
 http://clojure-doc.org/articles/tutorials/basic_web_development.html
@@ -16,7 +16,7 @@ refer site
 - https://github.com/dakrone/clj-http#optional-dependencies
 
 IP Location API
-http://ip-api.com/docs/api:jsonl
+- http://ip-api.com/docs/api:jsonl
 
 ## Prerequisites
 
