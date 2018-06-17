@@ -14,7 +14,7 @@
           (let [respon (:body (client/get api-addr {:as :json-kebab-keys}))]
             (let [mapcode (parse-string respon true)]
               (let [rets (str ip " | "(get mapcode :countryCode) " | " (get mapcode :org) "\n")]
-                (list (str ip rets))))))))))
+                (list rets)))))))))
 
 (deftest test-app
   (.println (System/out) "Hello")

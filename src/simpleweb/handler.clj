@@ -17,9 +17,12 @@
   (GET "/whois"
         []
         (views/whois))
-  (POST "/search-whois"
+  (POST "/whois"
         {params :params}
         (views/search-whois-page params))
+;  (POST "/search-whois"
+;        {params :params}
+;        (views/search-whois-page params))
   (GET "/location/:loc-id"
        [loc-id]
        (views/location-page loc-id))
