@@ -20,6 +20,12 @@
   (POST "/whois"
         {params :params}
         (views/search-whois-page params))
+  (GET "/decode"
+        []
+        (views/decode))
+  (POST "/decode"
+        {params :params}
+        (views/decode-page params))
 ;  (POST "/search-whois"
 ;        {params :params}
 ;        (views/search-whois-page params))

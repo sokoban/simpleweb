@@ -11,7 +11,8 @@
                  [ring/ring-defaults "0.2.1"]
                  [clj-http "3.9.0"]
                  [cheshire "5.8.0"]
-                 [org.clojure/data.json "0.2.6"]]
+                 [org.clojure/data.json "0.2.6"]
+                 [ring/ring-codec "1.1.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler simpleweb.handler/app}
   :profiles

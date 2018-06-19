@@ -20,6 +20,8 @@
    " | "
    [:a {:href "/whois"} "whois"]
    " | "
+   [:a {:href "/decode"} "Decode"]
+   " | "
    [:a {:href "/all-locations"} "View All Locations"]
    " ]"])
 
@@ -31,6 +33,30 @@
    [:h1 "Home"]
    [:p "Webapp to store and display some 2D (x,y) locations."]))
 
+(defn decode
+  []
+  (page/html5
+   (gen-page-head "Home")
+   header-links
+   [:h1 "Decode"]
+   [:form {:action "/decode" :method "POST"}
+     (util/anti-forgery-field) ; prevents cross-site scripting attacks
+     [:h2 "Decode String: "]
+     [:p [:textarea { :name "decstr" :rows "30" :cols "100"}]]
+     [:p [:input {:type "submit" :value "submit search"}]]]))
+
+(defn decode-page
+  [{:keys [decstr]}]
+  (page/html5
+     (gen-page-head "whois")
+     header-links
+     [:h1 "whois"]
+     [:form {:action "/decode" :method "POST"}
+       (util/anti-forgery-field) ; prevents cross-site scripting attacks
+       [:p "ip address value: " [:textarea { :name "decstr" :rows "10" :cols "20"}]]
+       [:p [:input {:type "submit" :value "submit search"}]]]))
+
+
 (defn whois
   []
   (page/html5
@@ -39,36 +65,29 @@
     [:h1 "whois"]
     [:form {:action "/whois" :method "POST"}
       (util/anti-forgery-field) ; prevents cross-site scripting attacks
-      [:p "ip address value: " [:textarea { :name "ipaddr" :rows "10" :cols "20"}]]
-;      [:p "ip address value: " [:input {:type "text" :name "ipaddr"}]]
+      [:h2 "ip address value: "]
+      [:p [:textarea { :name "ipaddr" :rows "20" :cols "40"}]]
       [:p [:input {:type "submit" :value "submit search"}]]]))
-
 
 (defn search-whois-page
   [{:keys [ipaddr]}]
-  (let [ret (owhois/getwhois ipaddr)]
-    (page/html5
-       (gen-page-head "whois")
-       header-links
-       [:h1 "whois"]
-       [:form {:action "/whois" :method "POST"}
-         (util/anti-forgery-field) ; prevents cross-site scripting attacks
-         [:p "ip address value: " [:textarea { :name "ipaddr" :rows "10" :cols "20" } ipaddr]]
-   ;      [:p "ip address value: " [:input {:type "text" :name "ipaddr"}]]
-         [:p [:input {:type "submit" :value "submit search"}]]
-         (if (not (empty? ipaddr))
-          (let [ret (owhois/getwhois ipaddr)]
-           [:h1 "whois results"]
-           [:table
-            [:tr [:th "data"]]
-            (for [ip ret]
-             [:tr [:td ip]])]))])))
-
-;       [:h1 "whois results"]
-;       [:table
-;        [:tr [:th "data"]]
-;        (for [ip ret]
-;          [:tr [:td ip]])])))
+  (page/html5
+     (gen-page-head "whois")
+     header-links
+     [:h1 "whois"]
+     [:form {:action "/whois" :method "POST"}
+       (util/anti-forgery-field) ; prevents cross-site scripting attacks
+       [:h2 "ip address value: "]
+       [:p [:textarea { :name "ipaddr" :rows "20" :cols "40" } ipaddr]]
+ ;      [:p "ip address value: " [:input {:type "text" :name "ipaddr"}]]
+       [:p [:input {:type "submit" :value "submit search"}]]
+       (if (not (empty? ipaddr))
+        (let [ret (owhois/getwhois ipaddr)]
+         [:h1 "whois results"]
+         [:table
+          [:tr [:th "data"]]
+          (for [ip ret]
+           [:tr [:td ip]])]))]))
 
 (defn add-location-page
   []

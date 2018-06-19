@@ -4,17 +4,6 @@
             [cheshire.core :refer :all]))
 
 
-;(defn getwhois
-;  [ipaddr]
-;  (let [iparray (clojure.string/split-lines ipaddr)]
-;    (for [ip iparray]
-;      (if (not (empty? ip))
-;        (let [api-addr (str "http://ip-api.com/json/" ip)]
-;          (let [respon (:body (client/get api-addr {:as :json-kebab-keys}))]
-;            (let [mapcode (parse-string respon true)]
-;              (let [ret (str ip " | "(get mapcode :countryCode) " | " (get mapcode :org) "\n")] ret)]))
-
-
 (defn getwhois
   [ipaddr]
   (let [iparray (clojure.string/split ipaddr #"\n")]
