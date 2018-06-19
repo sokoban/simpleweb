@@ -4,6 +4,7 @@
             [cheshire.core :refer :all]))
 
 
+; 150 ea / per 1 min
 (defn getwhois
   [ipaddr]
   (let [iparray (clojure.string/split ipaddr #"\n")]

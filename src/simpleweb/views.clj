@@ -3,6 +3,7 @@
             [clojure.string :as str]
             [hiccup.page :as page]
             [ring.util.anti-forgery :as util]
+            [clj-http.util :as cutil]
             [simpleweb.outwhois :as owhois]))
 
 (defn gen-page-head
@@ -47,15 +48,17 @@
 
 (defn decode-page
   [{:keys [decstr]}]
-  (page/html5
-     (gen-page-head "whois")
-     header-links
-     [:h1 "whois"]
-     [:form {:action "/decode" :method "POST"}
-       (util/anti-forgery-field) ; prevents cross-site scripting attacks
-       [:p "ip address value: " [:textarea { :name "decstr" :rows "10" :cols "20"}]]
-       [:p [:input {:type "submit" :value "submit search"}]]]))
-
+  (if (not (empty? decstr))
+    (let [decodedstr (cutil/url-decode decstr)]
+      (page/html5
+         (gen-page-head "whois")
+         header-links
+         [:h1 "whois"]
+         [:form {:action "/decode" :method "POST"}
+           (util/anti-forgery-field) ; prevents cross-site scripting attacks
+           [:h2 "Decode String: "]
+           [:p [:textarea { :name "decstr" :rows "30" :cols "100"} decodedstr]]
+           [:p [:input {:type "submit" :value "submit search"}]]]))))
 
 (defn whois
   []
@@ -63,6 +66,7 @@
     (gen-page-head "whois")
     header-links
     [:h1 "whois"]
+    [:p "Only Permit 150 / per 1 min"]
     [:form {:action "/whois" :method "POST"}
       (util/anti-forgery-field) ; prevents cross-site scripting attacks
       [:h2 "ip address value: "]
@@ -75,6 +79,7 @@
      (gen-page-head "whois")
      header-links
      [:h1 "whois"]
+     [:p "Only Permit 150 / per 1 min"]
      [:form {:action "/whois" :method "POST"}
        (util/anti-forgery-field) ; prevents cross-site scripting attacks
        [:h2 "ip address value: "]
