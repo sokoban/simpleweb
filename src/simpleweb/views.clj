@@ -21,7 +21,9 @@
    " | "
    [:a {:href "/whois"} "whois"]
    " | "
-   [:a {:href "/decode"} "Decode"]
+   [:a {:href "/decode"} "URL Decode"]
+   " | "
+   [:a {:href "/gmap"} "Google Map"]
    " | "
    [:a {:href "/all-locations"} "View All Locations"]
    " ]"])
@@ -93,6 +95,32 @@
           [:tr [:th "data"]]
           (for [ip ret]
            [:tr [:td ip]])]))]))
+
+(defn google_maps
+  []
+  (page/html5
+   (gen-page-head "Add a Location")
+   header-links
+   [:head]
+   [:style
+    "\n       /* Set the size of the div element that contains the map */\n      #map {\n        height: 600px;  /* The height is 400 pixels */\n        width: 100%;  /* The width is the width of the web page */\n       }\n    "]
+   [:body]
+   [:h3 "My Google Maps Demo"]
+   "<!--The div element for the map -->"
+   [:div#map]
+   [:script
+    "\n// Initialize and add the map\nfunction initMap() {\n
+     // The location of Uluru\n  var uluru = {lat: 34.857424 , lng: -111.763337};\n
+     // The map, centered at Uluru\n  var map = new google.maps.Map(\n
+        document.getElementById('map'), {zoom: 8, center: uluru});\n
+     // The marker, positioned at Uluru\n
+        var marker = new google.maps.Marker({position: uluru, map: map});\n}\n    "]
+   [:script
+    {:src
+     "https://maps.googleapis.com/maps/api/js?key=AIzaSyDj4HGBUCa5fkB90-OtkjKkltpqkhCZS3Q&callback=initMap",
+     :defer "defer",
+     :async "async"}]))
+
 
 (defn add-location-page
   []
