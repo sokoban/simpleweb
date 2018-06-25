@@ -20,6 +20,12 @@
   (POST "/whois"
         {params :params}
         (views/search-whois-page params))
+  (GET "/nmap"
+        []
+        (views/nmap))
+  (POST "/nmap"
+        {params :params}
+        (views/nmap-page params))
   (GET "/gmap"
        []
        (views/google_maps))

@@ -53,7 +53,7 @@
   (if (not (empty? decstr))
     (let [decodedstr (cutil/url-decode decstr)]
       (page/html5
-         (gen-page-head "whois")
+         (gen-page-head "decode")
          header-links
          [:h1 "whois"]
          [:form {:action "/decode" :method "POST"}
@@ -95,6 +95,42 @@
           [:tr [:th "data"]]
           (for [ip ret]
            [:tr [:td ip]])]))]))
+
+
+(defn nmap
+  []
+  (page/html5
+    (gen-page-head "nmap")
+    header-links
+    [:h1 "nmap"]
+    [:p "Only Permit 150 / per 1 min"]
+    [:form {:action "/whois" :method "POST"}
+      (util/anti-forgery-field) ; prevents cross-site scripting attacks
+      [:h2 "ip address value: "]
+      [:p [:textarea { :name "ipaddr" :rows "20" :cols "40"}]]
+      [:p [:input {:type "submit" :value "submit search"}]]]))
+
+(defn nmap-page
+  [{:keys [ipaddr]}]
+  (page/html5
+     (gen-page-head "nmap")
+     header-links
+     [:h1 "nmap"]
+     [:p "Only Permit 150 / per 1 min"]
+     [:form {:action "/whois" :method "POST"}
+       (util/anti-forgery-field) ; prevents cross-site scripting attacks
+       [:h2 "ip address value: "]
+       [:p [:textarea { :name "ipaddr" :rows "20" :cols "40" } ipaddr]]
+ ;      [:p "ip address value: " [:input {:type "text" :name "ipaddr"}]]
+       [:p [:input {:type "submit" :value "submit search"}]]
+       (if (not (empty? ipaddr))
+        (let [ret (owhois/getwhois ipaddr)]
+         [:h1 "whois results"]
+         [:table
+          [:tr [:th "data"]]
+          (for [ip ret]
+           [:tr [:td ip]])]))]))
+
 
 (defn google_maps
   []
