@@ -1,2 +1,2 @@
 (ns simpleweb.decode
-  (:require ))
+  (:require))

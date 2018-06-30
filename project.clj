@@ -14,6 +14,7 @@
                  [reagent "0.8.1"]
                  [re-scan "0.1.0"]
                  [org.clojure/data.json "0.2.6"]
+                 [com.7theta/clj-nmap "0.2.0"]
                  [ring/ring-codec "1.1.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler simpleweb.handler/app}

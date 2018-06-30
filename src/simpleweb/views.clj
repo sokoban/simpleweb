@@ -1,10 +1,12 @@
 (ns simpleweb.views
   (:require [simpleweb.db :as db]
             [clojure.string :as str]
+            [clojure.pprint :refer (pprint)]
             [hiccup.page :as page]
             [ring.util.anti-forgery :as util]
             [clj-http.util :as cutil]
-            [simpleweb.outwhois :as owhois]))
+            [simpleweb.outwhois :as owhois]
+            [simpleweb.nmap :as nmapscan]))
 
 (defn gen-page-head
   [title]
@@ -22,6 +24,8 @@
    [:a {:href "/whois"} "whois"]
    " | "
    [:a {:href "/decode"} "URL Decode"]
+   " | "
+   [:a {:href "/nmap"} "Nmap Port Scanner"]
    " | "
    [:a {:href "/gmap"} "Google Map"]
    " | "
@@ -90,7 +94,7 @@
        [:p [:input {:type "submit" :value "submit search"}]]
        (if (not (empty? ipaddr))
         (let [ret (owhois/getwhois ipaddr)]
-         [:h1 "whois results"]
+         [:h1 "whois results" ]
          [:table
           [:tr [:th "data"]]
           (for [ip ret]
@@ -103,11 +107,11 @@
     (gen-page-head "nmap")
     header-links
     [:h1 "nmap"]
-    [:p "Only Permit 150 / per 1 min"]
-    [:form {:action "/whois" :method "POST"}
+    [:p "PORT SCAN"]
+    [:form {:action "/nmap" :method "POST"}
       (util/anti-forgery-field) ; prevents cross-site scripting attacks
       [:h2 "ip address value: "]
-      [:p [:textarea { :name "ipaddr" :rows "20" :cols "40"}]]
+      [:p "IP value: " [:input {:type "text" :name "ipaddr"}]]
       [:p [:input {:type "submit" :value "submit search"}]]]))
 
 (defn nmap-page
@@ -116,20 +120,19 @@
      (gen-page-head "nmap")
      header-links
      [:h1 "nmap"]
-     [:p "Only Permit 150 / per 1 min"]
-     [:form {:action "/whois" :method "POST"}
+     [:p "PORT SCAN"]
+     [:form {:action "/nmap" :method "POST"}
        (util/anti-forgery-field) ; prevents cross-site scripting attacks
        [:h2 "ip address value: "]
-       [:p [:textarea { :name "ipaddr" :rows "20" :cols "40" } ipaddr]]
- ;      [:p "ip address value: " [:input {:type "text" :name "ipaddr"}]]
+       [:p "IP value: " [:input {:type "text" :name "ipaddr" :value ipaddr}]]
        [:p [:input {:type "submit" :value "submit search"}]]
+       [:h1 "Scan results "]
        (if (not (empty? ipaddr))
-        (let [ret (owhois/getwhois ipaddr)]
-         [:h1 "whois results"]
-         [:table
-          [:tr [:th "data"]]
-          (for [ip ret]
-           [:tr [:td ip]])]))]))
+         (let [ret (nmapscan/donmap ipaddr)]
+           [:table
+            [:tr [:th "data"]]
+            (for [ip ret]
+             [:tr [:td ip]])]))]))
 
 
 (defn google_maps
