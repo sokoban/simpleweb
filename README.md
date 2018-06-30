@@ -1,10 +1,13 @@
 # simpleweb
 
-This source code is clojure doccument sample
+This is Test WEB Site For clojure Dev
 
-and attach some function
+Some security Tools included
 
 1) Whois search
+2) NMAP Scan
+3) URL Decode
+4) Google Map Tracking (Dev)
 
 
 http://clojure-doc.org/articles/tutorials/basic_web_development.html
