@@ -1,3 +1,6 @@
+; Clojure kafka example
+; kafka consummer
+; teddy 2018/08/13
 (ns simpleweb.kafka_consummer
   (:require [clojure.tools.logging :as log]
             [clojure.test :refer :all])
