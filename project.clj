@@ -15,7 +15,14 @@
                  [re-scan "0.1.0"]
                  [org.clojure/data.json "0.2.6"]
                  [com.7theta/clj-nmap "0.2.0"]
-                 [ring/ring-codec "1.1.1"]]
+                 [ring/ring-codec "1.1.1"]
+                 [org.apache.kafka/kafka-clients "1.1.0"]
+                 [org.clojure/tools.logging "0.4.0"]
+                 [org.slf4j/slf4j-log4j12 "1.7.1"]
+                 [log4j/log4j "1.2.17" :exclusions [javax.mail/mail
+                                                    javax.jms/jms
+                                                    com.sun.jmdk/jmxtools
+                                                    com.sun.jmx/jmxri]]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler simpleweb.handler/app}
   :profiles

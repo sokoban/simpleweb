@@ -94,7 +94,7 @@
        [:p [:input {:type "submit" :value "submit search"}]]
        (if (not (empty? ipaddr))
         (let [ret (owhois/getwhois ipaddr)]
-         [:h1 "whois results" ]
+         [:h1 "whois results"]
          [:table
           [:tr [:th "data"]]
           (for [ip ret]
