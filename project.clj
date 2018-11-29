@@ -16,7 +16,17 @@
                  [org.clojure/data.json "0.2.6"]
                  [com.7theta/clj-nmap "0.2.0"]
                  [ring/ring-codec "1.1.1"]
+<<<<<<< HEAD
                  [org.onyxplatform/onyx "0.13.2"]]
+=======
+                 [org.apache.kafka/kafka-clients "1.1.0"]
+                 [org.clojure/tools.logging "0.4.0"]
+                 [org.slf4j/slf4j-log4j12 "1.7.1"]
+                 [log4j/log4j "1.2.17" :exclusions [javax.mail/mail
+                                                    javax.jms/jms
+                                                    com.sun.jmdk/jmxtools
+                                                    com.sun.jmx/jmxri]]]
+>>>>>>> 0e6692e520569ccef5eaa92e0c0e5b0ca3288ef5
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler simpleweb.handler/app}
   :profiles

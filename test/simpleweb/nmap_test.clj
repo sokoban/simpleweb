@@ -39,15 +39,15 @@
 
 (deftest test-app
   (.println (System/out) "Hello")
-  (def scan (nmap "/usr/local/bin/" "-T5" "221.143.42.85"))
-  (let [ret (open-ports scan)]
+;  (def scan (nmap "/usr/local/bin/" "-T5" "221.143.42.85"))
+;  (let [ret (open-ports scan)]
 ;    (pprint ret)
 ;    (pprint (type (doall ret)))
 
-    (let [proto (doall (map #(:protocol %) ret))
-          portid (doall (map #(:portid %) ret))
-          state (doall (map #(:state %) ret))]
-      (pprint (map vector proto portid state))))
+;    (let [proto (doall (map #(:protocol %) ret))
+;          portid (doall (map #(:portid %) ret))
+;          state (doall (map #(:state %) ret))
+;      (pprint (map vector proto portid state)))
 
   (.println (System/out) "Good Bye"))
 ;   )
