@@ -45,4 +45,4 @@
           portid (doall (map #(:portid %) ret))
           state (doall (map #(:state %) ret))
           reason (doall (map #(:reason %) ret))]
-      (map vector reason proto portid state))))
+      (map vector "A | " reason proto portid state))))
